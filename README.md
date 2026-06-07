@@ -62,12 +62,17 @@ By default, this installs `harpoon` to `~/.bin`.
 
 ## Zed Configuration
 
-Add these tasks to your global Zed `tasks.json`.
+Add one of these task sets to your global Zed `tasks.json`.
 
 Open it from Zed with `zed: open tasks`, or edit the file directly:
 
 - macOS/Linux: `~/.config/zed/tasks.json`
 - Windows: `%APPDATA%\Zed\tasks.json`
+
+### Normal Tasks
+
+These tasks use Zed's normal task behavior. Zed may show the task terminal while
+the command runs.
 
 ```json
 [
@@ -116,16 +121,102 @@ Open it from Zed with `zed: open tasks`, or edit the file directly:
 ]
 ```
 
-If `zed` or `zed.exe` is not on `PATH`, add `ZED_CLI_PATH` to each task:
+### Silent Tasks
+
+These tasks keep the task terminal out of the way during successful runs. This
+is useful on Windows, where Zed may otherwise open a bottom task terminal for
+each keybinding command.
+
+```json
+[
+  {
+    "label": "harpoon: open",
+    "command": "harpoon",
+    "args": ["open"],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "never",
+    "hide": "on_success",
+    "show_summary": false,
+    "show_command": false
+  },
+  {
+    "label": "harpoon: add",
+    "command": "harpoon",
+    "args": ["add"],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "never",
+    "hide": "on_success",
+    "show_summary": false,
+    "show_command": false
+  },
+  {
+    "label": "harpoon: go 1",
+    "command": "harpoon",
+    "args": ["go", "1"],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "never",
+    "hide": "on_success",
+    "show_summary": false,
+    "show_command": false
+  },
+  {
+    "label": "harpoon: go 2",
+    "command": "harpoon",
+    "args": ["go", "2"],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "never",
+    "hide": "on_success",
+    "show_summary": false,
+    "show_command": false
+  },
+  {
+    "label": "harpoon: go 3",
+    "command": "harpoon",
+    "args": ["go", "3"],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "never",
+    "hide": "on_success",
+    "show_summary": false,
+    "show_command": false
+  },
+  {
+    "label": "harpoon: go 4",
+    "command": "harpoon",
+    "args": ["go", "4"],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "never",
+    "hide": "on_success",
+    "show_summary": false,
+    "show_command": false
+  }
+]
+```
+
+Use `"hide": "always"` instead of `"hide": "on_success"` if you want task tabs
+hidden even when a command fails.
+
+### Zed CLI Path
+
+If `zed` or `zed.exe` is not on `PATH`, add `ZED_CLI_PATH` to each task.
+
+Windows:
 
 ```json
 "env": {
-  "ZED_CLI_PATH": "C:\\path\\to\\zed.exe"
+  "ZED_CLI_PATH": "C:\\Users\\you\\AppData\\Local\\Programs\\Zed\\bin\\Zed.exe"
 }
 ```
 
-On macOS, Zed installed in the default location works without extra
-configuration. For Zed Preview or another app bundle, set:
+macOS:
+
+Zed installed in the default location works without extra configuration. For Zed
+Preview or another app bundle, set:
 
 ```json
 "env": {

@@ -31,6 +31,11 @@ test:
 clean:
 	$(CARGO) clean
 
+ifeq ($(OS),Windows_NT)
+install:
+	$(CARGO) install --path . --force
+else
 install: build
 	install -d $(PREFIX)
 	install -m 755 target/release/harpoon $(PREFIX)/$(INSTALL_NAME)
+endif
